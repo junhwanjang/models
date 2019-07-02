@@ -139,7 +139,8 @@ def build(model_config, is_training, add_summaries=True):
 def _build_ssd_feature_extractor(feature_extractor_config,
                                  is_training,
                                  freeze_batchnorm,
-                                 reuse_weights=None):
+                                 reuse_weights=None,
+                                 num_input_channels=3):
   """Builds a ssd_meta_arch.SSDFeatureExtractor based on config.
 
   Args:
@@ -197,7 +198,9 @@ def _build_ssd_feature_extractor(feature_extractor_config,
       'use_depthwise':
           use_depthwise,
       'override_base_feature_extractor_hyperparams':
-          override_base_feature_extractor_hyperparams
+          override_base_feature_extractor_hyperparams,
+      'num_input_channels':
+          num_input_channels,
   }
 
   if feature_extractor_config.HasField('replace_preprocessor_with_placeholder'):
@@ -247,12 +250,14 @@ def _build_ssd_model(ssd_config, is_training, add_summaries):
       model_class_map).
   """
   num_classes = ssd_config.num_classes
+  num_input_channels = ssd_config.num_input_channels
 
   # Feature extractor
   feature_extractor = _build_ssd_feature_extractor(
       feature_extractor_config=ssd_config.feature_extractor,
       freeze_batchnorm=ssd_config.freeze_batchnorm,
-      is_training=is_training)
+      is_training=is_training,
+      num_input_channels=num_input_channels)
 
   box_coder = box_coder_builder.build(ssd_config.box_coder)
   matcher = matcher_builder.build(ssd_config.matcher)

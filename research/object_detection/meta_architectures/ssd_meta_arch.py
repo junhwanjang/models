@@ -45,7 +45,8 @@ class SSDFeatureExtractor(object):
                reuse_weights=None,
                use_explicit_padding=False,
                use_depthwise=False,
-               override_base_feature_extractor_hyperparams=False):
+               override_base_feature_extractor_hyperparams=False,
+               num_input_channels=3):
     """Constructor.
 
     Args:
@@ -75,6 +76,7 @@ class SSDFeatureExtractor(object):
     self._use_depthwise = use_depthwise
     self._override_base_feature_extractor_hyperparams = (
         override_base_feature_extractor_hyperparams)
+    self._num_input_channels = num_input_channels
 
   @property
   def is_keras_model(self):
@@ -149,6 +151,7 @@ class SSDKerasFeatureExtractor(tf.keras.Model):
                use_explicit_padding=False,
                use_depthwise=False,
                override_base_feature_extractor_hyperparams=False,
+               num_input_channels=3,
                name=None):
     """Constructor.
 
@@ -191,6 +194,7 @@ class SSDKerasFeatureExtractor(tf.keras.Model):
     self._use_depthwise = use_depthwise
     self._override_base_feature_extractor_hyperparams = (
         override_base_feature_extractor_hyperparams)
+    self._num_input_channels = num_input_channels
 
   @property
   def is_keras_model(self):
