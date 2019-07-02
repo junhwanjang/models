@@ -12,7 +12,7 @@ import "object_detection/protos/post_processing.proto";
 import "object_detection/protos/region_similarity_calculator.proto";
 
 // Configuration for Single Shot Detection (SSD) models.
-// Next id: 26
+// Next id: 27
 message Ssd {
 
   // Number of classes to predict.
@@ -97,7 +97,7 @@ message Ssd {
   optional float implicit_example_weight = 23 [default = 1.0];
 
   // Add num input channels
-  optional uint32 num_input_channels = 25 [default = 3];
+  optional uint32 num_input_channels = 26 [default = 3];
 
   // Configuration proto for MaskHead.
   // Next id: 11
